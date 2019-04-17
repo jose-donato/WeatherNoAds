@@ -4,7 +4,7 @@ If you like it, hit a star. It means a lot to me.
 
 ![Alt text](preview.jpg?raw=true "CoyoteReact Preview")
 
-# Debugging
+# Launching
 
 
 To build dev version and start server:
