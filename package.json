@@ -36,7 +36,8 @@
   },
   "rnpm": {
     "assets": [
-      "assets/fonts/BebasNeue"
+      "assets/fonts/BebasNeue",
+      "assets/fonts/SairaSemi"
     ]
   }
 }

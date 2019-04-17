@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   text: {
     color: "#6f6f6f",
     fontFamily: "SairaSemiCondensed-Regular",
-    fontSize: 15
+    fontSize: 14
   },
   textDay: {
     color: "#6f6f6f",

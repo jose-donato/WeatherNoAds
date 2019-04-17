@@ -36,9 +36,7 @@ function Weather(props) {
       colors={["#5ecbed", "#165679"]}
       style={styles.linearGradient}
     >
-      <Headline style={styles.headline}>
-        {props.cityName.split(", ")[0]}
-      </Headline>
+      <Headline style={styles.headline}>{props.cityName}</Headline>
       <CurrentWeather data={data.currently} />
       <WeatherPredict data={data.daily} />
     </LinearGradient>

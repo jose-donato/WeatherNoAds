@@ -22,14 +22,14 @@ function Results(props) {
         Actions.weather({
           latitude: item.lat,
           longitude: item.lon,
-          cityName: item.display_name
+          cityName: getResult(item.display_name)
         });
         props.dispatch({
           type: "SET_LAST_SEARCH",
           lastSearch: {
             latitude: item.lat,
             longitude: item.lon,
-            cityName: item.display_name
+            cityName: getResult(item.display_name)
           }
         });
       }}
