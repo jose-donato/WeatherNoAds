@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, TextInput, Image, Text } from "react-native";
-import { Button, Headline } from "react-native-paper";
+import { StyleSheet, TextInput, Text, View } from "react-native";
+import { Button, Headline, Card, Title } from "react-native-paper";
 import LinearGradient from "react-native-linear-gradient";
 import { Actions } from "react-native-router-flux";
+import { connect } from "react-redux";
 
-function Home() {
+function Home(props) {
   const [text, setText] = useState("");
 
   const search = () => {
@@ -13,6 +14,23 @@ function Home() {
     }
     Actions.results({ search: text });
   };
+
+  function getLastSearch() {
+    if (props.lastSearch !== undefined) {
+      return (
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <Headline style={styles.headline2}>Your last location</Headline>
+          <Button
+            mode="contained"
+            onPress={() => Actions.weather(props.lastSearch)}
+            style={styles.buttonLast}
+          >
+            <Text style={styles.text}>{props.lastSearch.cityName}</Text>
+          </Button>
+        </View>
+      );
+    }
+  }
 
   return (
     <LinearGradient
@@ -31,6 +49,7 @@ function Home() {
       <Button mode="contained" onPress={search} style={styles.button}>
         <Text style={styles.text}>Search</Text>
       </Button>
+      {getLastSearch()}
     </LinearGradient>
   );
 }
@@ -50,12 +69,17 @@ const styles = StyleSheet.create({
     borderBottomColor: "#f5f2ed",
     borderBottomWidth: 2,
     marginTop: 20,
-    fontFamily: "BebasNeue-Regular",
+    fontFamily: "SairaSemiCondensed-Regular",
     fontSize: 15
   },
   button: {
     marginTop: 20,
     width: 120,
+    padding: 10,
+    fontFamily: "BebasNeue-Regular"
+  },
+  buttonLast: {
+    marginTop: 20,
     padding: 10,
     fontFamily: "BebasNeue-Regular"
   },
@@ -65,7 +89,28 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: "#fff"
+  },
+  headline2: {
+    fontFamily: "BebasNeue-Regular",
+    marginTop: 20,
+    marginBottom: 15,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: "#fff"
+  },
+  card: { backgroundColor: "#fff", maxHeight: 100 },
+  content: { padding: 5, margin: 0 },
+  cardTitle: {
+    color: "#6f6f6f",
+    fontSize: 14,
+    fontFamily: "BebasNeue-Regular"
   }
 });
 
-export default Home;
+function mapStateToProps(state) {
+  return {
+    lastSearch: state.lastSearch
+  };
+}
+
+export default connect(mapStateToProps)(Home);

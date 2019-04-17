@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import {
-  Text,
   Card,
   Title,
-  Paragraph,
   Headline,
   Colors,
   ActivityIndicator
@@ -12,6 +10,7 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import { Location } from "../api";
 import { Actions } from "react-native-router-flux";
+import { connect } from "react-redux";
 
 function Results(props) {
   const [data, setData] = useState(undefined);
@@ -19,13 +18,21 @@ function Results(props) {
   _renderItem = ({ item }) => (
     <Card
       style={styles.card}
-      onPress={() =>
+      onPress={() => {
         Actions.weather({
           latitude: item.lat,
           longitude: item.lon,
           cityName: item.display_name
-        })
-      }
+        });
+        props.dispatch({
+          type: "SET_LAST_SEARCH",
+          lastSearch: {
+            latitude: item.lat,
+            longitude: item.lon,
+            cityName: item.display_name
+          }
+        });
+      }}
     >
       <Card.Content style={styles.content}>
         <Title style={styles.cardTitle}>{getResult(item.display_name)}</Title>
@@ -105,4 +112,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Results;
+function mapStateToProps(state) {
+  return {
+    lastSearch: state.lastSearch
+  };
+}
+
+export default connect(mapStateToProps)(Results);

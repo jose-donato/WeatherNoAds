@@ -90,21 +90,25 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   info: { width: "50%" },
-  text: { color: "#6f6f6f", fontFamily: "BebasNeue-Regular", fontSize: 15 },
+  text: {
+    color: "#6f6f6f",
+    fontFamily: "SairaSemiCondensed-Regular",
+    fontSize: 14
+  },
   textSun: {
     color: "#6f6f6f",
-    fontFamily: "BebasNeue-Regular",
-    fontSize: 15,
+    fontFamily: "SairaSemiCondensed-Regular",
+    fontSize: 14,
     marginRight: 5,
     marginLeft: 5
   },
   textSummary: {
     color: "#6f6f6f",
-    fontFamily: "BebasNeue-Regular",
-    fontSize: 15,
+    fontFamily: "SairaSemiCondensed-Regular",
+    fontSize: 13,
     marginTop: 10,
-    paddingRight: 8,
-    paddingLeft: 8,
+    paddingRight: 20,
+    paddingLeft: 20,
     textAlign: "center"
   },
   textDay: {

@@ -15,10 +15,22 @@ import { Scene, Router } from "react-native-router-flux";
 import { Home, Results, Weather } from "./views";
 import SplashScreen from "react-native-splash-screen";
 import reducer from "./reducer";
+import { persistStore, persistReducer } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+import storage from "redux-persist/lib/storage";
 
-const store = createStore(reducer);
+const persistConfig = {
+  key: "root",
+  storage
+};
 
-store.subscribe(() => console.log(store.getState()));
+const persistedReducer = persistReducer(persistConfig, reducer);
+let store = createStore(persistedReducer);
+let persistor = persistStore(store);
+
+store.subscribe(() => {
+  console.log(store.getState());
+});
 
 const theme = {
   ...DefaultTheme,
@@ -45,13 +57,15 @@ export default class App extends React.Component {
     return (
       <StoreProvider store={store}>
         <PaperProvider theme={theme}>
-          <Router>
-            <Scene key="root">
-              <Scene key="home" component={Home} hideNavBar initial />
-              <Scene key="results" component={Results} hideNavBar />
-              <Scene key="weather" component={Weather} hideNavBar />
-            </Scene>
-          </Router>
+          <PersistGate loading={null} persistor={persistor}>
+            <Router>
+              <Scene key="root">
+                <Scene key="home" component={Home} hideNavBar initial />
+                <Scene key="results" component={Results} hideNavBar />
+                <Scene key="weather" component={Weather} hideNavBar />
+              </Scene>
+            </Router>
+          </PersistGate>
         </PaperProvider>
       </StoreProvider>
     );

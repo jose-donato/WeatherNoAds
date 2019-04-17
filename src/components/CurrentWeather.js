@@ -54,7 +54,11 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   info: { width: "55%" },
-  text: { color: "#6f6f6f", fontFamily: "BebasNeue-Regular", fontSize: 15 },
+  text: {
+    color: "#6f6f6f",
+    fontFamily: "SairaSemiCondensed-Regular",
+    fontSize: 15
+  },
   textDay: {
     color: "#6f6f6f",
     fontFamily: "BebasNeue-Regular",

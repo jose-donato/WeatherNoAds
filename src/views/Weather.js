@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, TextInput } from "react-native";
-import {
-  Text,
-  Card,
-  Title,
-  Paragraph,
-  Headline,
-  Colors,
-  ActivityIndicator
-} from "react-native-paper";
+import { StyleSheet } from "react-native";
+import { Headline, Colors, ActivityIndicator } from "react-native-paper";
 import LinearGradient from "react-native-linear-gradient";
 import { WeatherData } from "../api";
 import { CurrentWeather, WeatherPredict } from "../components";
@@ -25,7 +17,6 @@ function Weather(props) {
   async function getData(lat, lon) {
     const fetchedData = await WeatherData(lat, lon);
     if (fetchedData !== undefined) {
-      console.log(fetchedData);
       setData(fetchedData);
     }
   }
