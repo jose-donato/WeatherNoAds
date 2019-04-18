@@ -5,6 +5,9 @@ import LinearGradient from "react-native-linear-gradient";
 import { WeatherData } from "../api";
 import { CurrentWeather, WeatherPredict } from "../components";
 
+import CustomHeadline from "../components/CustomHeadline"
+
+
 function Weather(props) {
   const [data, setData] = useState(undefined);
 
@@ -36,7 +39,7 @@ function Weather(props) {
       colors={["#5ecbed", "#165679"]}
       style={styles.linearGradient}
     >
-      <Headline style={styles.headline}>{props.cityName}</Headline>
+      <CustomHeadline headlineNumber={1} headlineText={props.cityName}/>
       <CurrentWeather data={data.currently} />
       <WeatherPredict data={data.daily} />
     </LinearGradient>
@@ -50,27 +53,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 15
   },
-  input: {
-    width: "70%",
-    padding: 10,
-    backgroundColor: "transparent",
-    color: "#222",
-    borderBottomColor: "white",
-    borderBottomWidth: 2,
-    marginTop: 20
-  },
-  button: {
-    marginTop: 20,
-    width: 150,
-    padding: 10
-  },
-  headline: {
-    fontFamily: "BebasNeue-Regular",
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: "#fff",
-    marginBottom: 10
-  }
 });
 
 export default Weather;

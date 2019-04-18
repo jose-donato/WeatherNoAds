@@ -4,6 +4,8 @@ import { Button, Headline, Card, Title } from "react-native-paper";
 import LinearGradient from "react-native-linear-gradient";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
+import CustomButton from '../components/CustomButton'
+import CustomHeadline from '../components/CustomHeadline'
 
 function Home(props) {
   const [text, setText] = useState("");
@@ -19,14 +21,11 @@ function Home(props) {
     if (props.lastSearch !== undefined) {
       return (
         <View style={{ justifyContent: "center", alignItems: "center" }}>
-          <Headline style={styles.headline2}>Your last location</Headline>
-          <Button
-            mode="contained"
-            onPress={() => Actions.weather(props.lastSearch)}
-            style={styles.buttonLast}
-          >
-            <Text style={styles.text}>{props.lastSearch.cityName}</Text>
-          </Button>
+
+          <CustomHeadline headlineNumber={2} headlineText={"Your last location"} />
+        
+          <CustomButton searchFunc={() => Actions.weather(props.lastSearch)} searchText={props.lastSearch.cityName}/>
+        
         </View>
       );
     }
@@ -37,7 +36,8 @@ function Home(props) {
       colors={["#5ecbed", "#165679"]}
       style={styles.linearGradient}
     >
-      <Headline style={styles.headline}>Weather without ads</Headline>
+      <CustomHeadline headlineNumber={1} headlineText={"Weather without ads"} />
+      
       <TextInput
         value={text}
         onChangeText={text => setText(text)}
@@ -46,9 +46,9 @@ function Home(props) {
         placeholderTextColor="#eae8e5"
         style={styles.input}
       />
-      <Button mode="contained" onPress={search} style={styles.button}>
-        <Text style={styles.text}>Search</Text>
-      </Button>
+
+      <CustomButton searchFunc={search} searchText={"Search"}/>
+      
       {getLastSearch()}
     </LinearGradient>
   );
@@ -72,39 +72,14 @@ const styles = StyleSheet.create({
     fontFamily: "SairaSemiCondensed-Regular",
     fontSize: 15
   },
-  button: {
-    marginTop: 20,
-    width: 120,
-    padding: 10,
-    fontFamily: "BebasNeue-Regular"
-  },
+
   buttonLast: {
     marginTop: 20,
     padding: 10,
     fontFamily: "BebasNeue-Regular"
   },
+
   text: { color: "#6f6f6f", fontFamily: "BebasNeue-Regular" },
-  headline: {
-    fontFamily: "BebasNeue-Regular",
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: "#fff"
-  },
-  headline2: {
-    fontFamily: "BebasNeue-Regular",
-    marginTop: 20,
-    marginBottom: 15,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: "#fff"
-  },
-  card: { backgroundColor: "#fff", maxHeight: 100 },
-  content: { padding: 5, margin: 0 },
-  cardTitle: {
-    color: "#6f6f6f",
-    fontSize: 14,
-    fontFamily: "BebasNeue-Regular"
-  }
 });
 
 function mapStateToProps(state) {
