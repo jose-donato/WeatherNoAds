@@ -7,11 +7,11 @@
  */
 
 import React from "react";
-import { StyleSheet } from "react-native";
+import { BackHandler } from "react-native";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { Provider as StoreProvider } from "react-redux";
 import { createStore } from "redux";
-import { Scene, Router } from "react-native-router-flux";
+import { Scene, Router, Actions } from "react-native-router-flux";
 import { Home, Results, Weather } from "./views";
 import SplashScreen from "react-native-splash-screen";
 import reducer from "./reducer";
@@ -50,6 +50,9 @@ export default class App extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       SplashScreen.hide();
+      BackHandler.addEventListener("hardwareBackPress", function() {
+        if (Actions.currentScene == "home") BackHandler.exitApp();
+      });
     }, 200);
   }
 
