@@ -9,7 +9,7 @@ Also you can find this app on Google Play - https://play.google.com/store/apps/d
 
 
 To build dev version and start server:
-
+```npm i```
 ```react-native run-android```
 
 To build release apk:
